@@ -1,23 +1,25 @@
-import logo from './logo.svg';
 import './App.css';
+import Auth from './auth';
+import { useAuthContext } from '@asgardeo/auth-react';
 
 function App() {
+  const { signOut } = useAuthContext();
+
+  const logout = () => {
+    Auth.logout(() => {
+      signOut();
+      window.location.reload();
+    });
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className='signin-main'>
+      <div className='signin-button-main'>
+        <span className='span'>This is my Dashboard</span>
+        <button className='signin-button' onClick={() => logout()}>
+          Sign Out
+        </button>
+      </div>
     </div>
   );
 }
